@@ -50,7 +50,7 @@ class Produtos extends Component {
                     <ul>
                         { categorias.map(this.renderCategoria) }
                     </ul>
-                    <div className='well'>
+                    <div className='well well-sm'>
                         <input className='form-control'
                             onKeyUp={this.handleNewCategoria}
                             type="text"

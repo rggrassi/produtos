@@ -29,8 +29,7 @@ class Categoria extends Component {
         this.loadCategoria(id);
     }
 
-    componentDidUpdate(prevProps, prevState) {
-        
+    componentDidUpdate(prevProps) {        
         if (prevProps.match.params.catId !== this.props.match.params.catId) {
             this.loadProdutos(this.props.match.params.catId);
             this.loadCategoria(this.props.match.params.catId);
