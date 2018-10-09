@@ -2,52 +2,41 @@ import React, { Component } from 'react';
 import { Route, Link } from 'react-router-dom';
 import ProdutosHome from './ProdutosHome';
 import Categoria from './Categoria'
-import axios from 'axios';
-
-const url ='http://localhost:3001/categorias';
 
 class Produtos extends Component {
 
-    constructor(props) {
-        super(props)
-        this.state = {
-            categorias: []
-        }
-    }
-
     componentDidMount() {
-        this.loadCategorias();
+        this.props.loadCategorias();
     }
 
-    renderCategoria(cat) {
+    renderCategoria = cat => {
         return (
             <li key={cat.id}>
                 <Link to={`/produtos/categorias/${cat.id}`}>{cat.categoria}</Link>   
+                <button onClick={() => this.props.removeCategoria(cat)} className='btn btn-sm'> 
+                    <span className='glyphicon glyphicon-remove'></span>
+                </button>
+                <button onClick={() => this.props.removeCategoria(cat)} className='btn btn-sm'> 
+                    <span className='glyphicon glyphicon-pencil'></span>
+                </button>
             </li>
         )
     }
 
-    handleNewCategoria = async (key) => {
+    handleNewCategoria = async key => {
         if (key.keyCode === 13) { 
-            await axios.post(url, { categoria: this.refs.categoria.value });
-            this.loadCategorias();
+            this.props.createCategoria({ categoria: this.refs.categoria.value })
             this.refs.categoria.value = '';
         }
     } 
 
-    loadCategorias = async () => {
-        const res = await axios.get(url);
-        this.setState({ categorias: res.data });   
-    }
-
     render() {
-        const { match } = this.props;
-        const { categorias } = this.state;
+        const { match, categorias } = this.props;
         return (
             <div className='row'> 
                 <div className='col-md-2'>
                     <h3>Categorias</h3>
-                    <ul>
+                    <ul style={{ listStyle: 'none', padding: 0 }}>
                         { categorias.map(this.renderCategoria) }
                     </ul>
                     <div className='well well-sm'>
