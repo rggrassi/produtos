@@ -9,8 +9,15 @@ class App extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      categorias: []
+      categorias: [],
+      produtos: [],
+      categoria: {}
     }
+  }
+
+  readCategoria = async categoria => {
+    const res = await this.props.api.readCategoria(categoria);   
+    this.setState({ categoria: res.data }) 
   }
 
   loadCategorias = async () => {
@@ -26,6 +33,36 @@ class App extends Component {
   createCategoria = async categoria => {
     await this.props.api.createCategoria(categoria);
     this.loadCategorias();
+  }
+
+  editCategoria = async categoria => {
+    await this.props.api.editCategoria(categoria);
+    this.loadCategorias();
+  }
+
+  createProduto = produto => {
+    return this.props.api.createProduto(produto);
+  }
+
+  loadProdutos = async categoria => {
+    try {
+      const res = await this.props.api.loadProdutos(categoria);
+      this.setState({ produtos: res.data });
+    } catch (e) {
+      console.log("Erro: ", e);
+    }
+  }
+
+  removeProduto = produto => {
+    return this.props.api.deleteProduto(produto.id)
+  }
+
+  readProduto = id => {
+    return this.props.api.readProduto(id);
+  }
+
+  editProduto = produto => {
+    return this.props.api.editProduto(produto);
   }
 
   render() {
@@ -53,10 +90,20 @@ class App extends Component {
               return (
                 <Produtos 
                   {...props} 
+                  categoria={this.state.categoria}
+                  readCategoria={this.readCategoria}
                   loadCategorias={this.loadCategorias}
                   removeCategoria={this.removeCategoria}
                   createCategoria={this.createCategoria}
+                  editCategoria={this.editCategoria}
                   categorias={this.state.categorias}
+
+                  createProduto={this.createProduto}
+                  loadProdutos={this.loadProdutos}
+                  produtos={this.state.produtos}
+                  removeProduto={this.removeProduto}
+                  readProduto={this.readProduto}
+                  editProduto={this.editProduto}
                 />
               )}}
             />

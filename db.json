@@ -11,19 +11,40 @@
       "categoria": 1
     },
     {
-      "id": 3,
-      "produto": "Bolacha",
-      "categoria": 2
+      "produto": "Desinfetante",
+      "categoria": "5",
+      "id": 5
+    },
+    {
+      "id": 7,
+      "produto": "Detergente líquido",
+      "categoria": "5"
+    },
+    {
+      "produto": "Feijão",
+      "categoria": "2",
+      "id": 10
+    },
+    {
+      "produto": "Batata inglesa",
+      "categoria": "2",
+      "id": 11
+    },
+    {
+      "id": 12,
+      "produto": "Camiseta",
+      "categoria": "4"
+    },
+    {
+      "id": 13,
+      "produto": "Alicate",
+      "categoria": "3"
     }
   ],
   "categorias": [
     {
-      "id": 1,
-      "categoria": "Limpeza"
-    },
-    {
-      "id": 2,
-      "categoria": "Alimentos"
+      "categoria": "Alimentos",
+      "id": 2
     },
     {
       "categoria": "Ferramentas",
@@ -32,6 +53,10 @@
     {
       "categoria": "Vestuário",
       "id": 4
+    },
+    {
+      "categoria": "Limpeza",
+      "id": 5
     }
   ]
 }
